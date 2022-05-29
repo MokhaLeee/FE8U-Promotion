@@ -23,6 +23,8 @@ struct Proc_PromoMain {
 	/* 34 */ ProcPtr pPromotionSub6C;
 	/* 38 */ u8 charId;
 	/* 39 */ u8 modeId;
+	/* 3A */ u8 unk3A;
+	/* 3B */ u8 promoClass;				// class index that will promote to
 	
 };
 
@@ -34,8 +36,12 @@ struct Proc_PromoDisp {
 	/* 32 */ u16 promotedClassAnimIds[3];
 	/* 38 */ u16 promotedClassDescIds[3];
 	/* 3E */ u8 pad_3E[0x40 - 0x3E];
-	/* 40 */ u8 unk_40;
-	/* 41 */ u8 selectedOptionIndex;
+	
+	// a timer when change class: 0->1->2, 1=remove, 2=intro
+	/* 40 */ u8 state;							
+	
+	// Current index in proc class list(0,1,2)
+	/* 41 */ u8 selectedOptionIndex;			
 	/* 42 */ u16 charId;
 	/* 44 */ u8 pad_44[0x48 - 0x44];
 	/* 48 */ u16 displayedWeapon;
@@ -45,6 +51,11 @@ struct Proc_PromoDisp {
 	/* 54 */ struct MenuProc* pMenuSelectProc;
 };
 
+
+struct Proc_PromoMenuSelect{
+	/* 00 */ PROC_HEADER;
+	/* 29 */
+};
 
 
 // const struct ProcCmd NewProc_PromotionDisplay[] = {};
