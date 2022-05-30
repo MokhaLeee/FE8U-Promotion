@@ -1,6 +1,13 @@
 #pragma once
 
 #include "gbafe.h"
+enum{
+	
+	// Proc_PromoInit->promContextId
+	PROMO_INIT_CONTEXT_TRAINEE = 0,
+	PROMO_INIT_CONTEXT_PREP = 1,
+	PROMO_INIT_CONTEXT_BMMAP = 2,
+};
 
 struct Proc_PromoInit {
 	/* 00 */ PROC_HEADER;
@@ -10,11 +17,20 @@ struct Proc_PromoInit {
 	/* 31 */ u8 promContextId;
 	/* 32 */ u8 unk_32;
 	/* 33 */ u8 charId;
-	/* 34 */ u8 unk_34[0x38 - 0x34];
+	/* 34 */ u8 unk34;		// a config(0 will directly promote, 1 will start menu)
+	/* 35 */ u8 unk35;		// class index to promote
+	/* 36 */ u8 unk_36[0x38 - 0x36];
 	/* 38 */ struct Unit* unit;
 	/* 3C */ u32 promotionItemSlot;
+	
+	// new here
+	/* 40 */ u8 pad_40[0x64 - 0x40];
+	/* 64 */ u16 item;
+	/* 66 */ u8 count;
+	/* 67 */ u8 classOld;
 };
 
+extern const struct ProcCmd gProc_PromotionInit[];
 
 struct Proc_PromoMain {
 	/* 00 */ PROC_HEADER;
